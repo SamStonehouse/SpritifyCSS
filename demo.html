@@ -1,0 +1,33 @@
+<!doctype=html>
+<html>
+	<head>
+		<title>SpritifyCSS Demo</title>
+	</head>
+	<body>
+		<input id="files" name="files" type="file" multiple="multiple">
+		<button id="generate">Generate</button>
+		<div id="image-container">
+			
+		</div>
+		<script src="lib/jszip.js"></script>
+		<script src="lib/packer.js"></script>
+		<script src="spritify.js"></script>
+		<script>
+			var files = document.getElementById('files');
+			var button = document.getElementById('generate');
+			var imageContainer = document.getElementById('image-container');
+
+			var spritify = new Spritify();
+
+			button.onclick = function() {
+				console.log("Button clicked");
+
+				spritify.loadFiles(files.files, {debug: true}, function() {
+					console.log("Loading complete");
+					console.log(spritify.getPng());
+					imageContainer.innerHTML = "<img src='" + spritify.getPng() + "' alt=''>";
+				});
+			};
+		</script>
+	</body>
+</html>
