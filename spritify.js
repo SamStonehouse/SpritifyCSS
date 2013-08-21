@@ -76,8 +76,6 @@ var Spritify = (function(GrowingPacker, JSZip, undefined) {
 
 		if (this.options.debug) { console.log("Loading images"); }
 
-		var that = this;
-
 		for (var i = 0; i < this.numImages; i++) {
 			this.images[i] = new ImageFile();
 			this.images[i].load(files[i], this.options, this._loadedImage.bind(this));
@@ -245,11 +243,12 @@ var Spritify = (function(GrowingPacker, JSZip, undefined) {
 	ImageFile.prototype.getFormattedName = function() {
 		//Remove the file extension
 		var res = this.file.name.split(".");
+		
 		if (res.length > 1) {
 			res.pop();
 		}
 
-		//Replace whitespace with '-'
+		//Replace whitespace with '-' and make everything lowercase
 		res = '.sprite-' + res.toLowerCase()
 		.replace(/^\s+|\s+$/g, '')
 		.replace(/[\s.-]+/g, '-');
