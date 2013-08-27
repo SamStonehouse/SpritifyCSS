@@ -75,13 +75,14 @@ var Spritify = (function(GrowingPacker, JSZip, undefined) {
 		this.options = opts ? mergeOptions(defaults, opts) : defaults;
 
 		if (this.options.debug) { console.log("Loading images"); }
-
+		
+		//Load each image as an ImageFile object and append it to the images array
 		for (var i = 0; i < this.numImages; i++) {
-			this.images[i] = new ImageFile();
-			this.images[i].load(files[i], this.options, this._loadedImage.bind(this));
+			var imgFile = new ImageFile();
+			imgFile.load(files[i], this.options, this._loadedImage.bind(this));
+			
+			this.images[i] = imgFile;
 		}
-
-		this._loadedImage();
 	};
 
 	ImagePacker.prototype._loadedImage = function() {
